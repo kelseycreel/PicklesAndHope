@@ -89,9 +89,15 @@ namespace PickleAndHope.DataAccess
                             output inserted.*
                             where Id = @Id";
 
+            var parameters = new
+            {
+                NewStock = pickle.NumberInStock,
+                Id = pickle.Id
+            };
+
             using (var db = new SqlConnection(ConnectionString))
             {
-                var result = db.QueryFirst<Pickle>(sql, pickle);
+                var result = db.QueryFirst<Pickle>(sql, parameters);
                 return result;
             }
         }
